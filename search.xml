@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Singly Linked List Stack]]></title>
+    <url>%2F2020%2F06%2F23%2FSingly-Linked-List-Stack%2F</url>
+    <content type="text"><![CDATA[Singly Linked List Stack 123456789101112131415161718192021222324252627282930313233343536373839private Node head = new Node(0);public void push(int num) &#123; Node node = new Node(num); Node temp = head; while(temp.next != null) &#123; temp = temp.next; &#125; temp.next = node;&#125;public int pop() &#123; if(head.next == null) &#123; throw new RuntimeException("棧空"); &#125; Node temp = head; while(temp.next.next != null) &#123; temp = temp.next; &#125; int val = temp.next.num; temp.next = null; return val;&#125;public void list() &#123; if(head.next == null) &#123; System.out.println("棧空"); return; &#125; Stack&lt;Node&gt; stack = new Stack&lt;&gt;(); Node temp = head.next; while(temp != null) &#123; stack.push(temp); temp = temp.next; &#125; while(stack.size() &gt; 0) &#123; System.out.println(stack.pop()); &#125;&#125;]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Array Stack]]></title>
+    <url>%2F2020%2F06%2F23%2FArray-Stack%2F</url>
+    <content type="text"><![CDATA[Array Stack 12345678910111213141516171819202122232425262728293031323334353637private int maxSize;private int[] stack;private int top = -1;public ArrayStack(int maxSize) &#123; this.maxSize = maxSize; stack = new int[this.maxSize];&#125;public void push(int num) &#123; if(isFull()) &#123; System.out.println("棧滿"); return; &#125; top++; stack[top] = num;&#125;public int pop() &#123; if(isEmpty()) &#123; throw new RuntimeException("棧空"); &#125; int temp = stack[top]; top--; return temp;&#125;public void list() &#123; if(isEmpty()) &#123; System.out.println("棧空"); return; &#125; //從棧頂開始顯示數據 for (int i = top; i &gt;= 0 ; i--) &#123; System.out.printf("stack[%d]=%d\n", i, stack[i]); &#125;&#125;]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Josephus Problem]]></title>
+    <url>%2F2020%2F06%2F21%2FJosephus-Problem%2F</url>
+    <content type="text"><![CDATA[Josephus Problem 123456789101112131415161718192021222324252627282930313233343536373839/*start: 從第幾個node開始數數count: 數幾下num: 最初總共有幾個node*/public void count(int start, int count, int num) &#123; if(head == null || start &lt; 1 || count &lt; 1 || start &gt; num) &#123; System.out.println("參數輸入有誤，請重新輸入"); return; &#125; Node helper = head; while(true) &#123; if(helper.getNext() == head) &#123; //helper指向最後一個節點 break; &#125; helper = helper.getNext(); &#125; //報數前，先讓head和helper移動 start - 1 次 for (int i = 0; i &lt; start - 1; i++) &#123; head = head.getNext(); helper = helper.getNext(); &#125; //報數時，讓head和helper移動 count -1 次，然後出圈 //這裡是一個循環操作，直到圈中剩下一個節點 while(true) &#123; if(helper == head) &#123; break; &#125; for (int i = 0; i &lt; count - 1; i++) &#123; head = head.getNext(); helper = helper.getNext(); &#125; //這時head指向要出圈的節點 System.out.printf("節點編號%d出圈\n", head.getNo()); head = head.getNext(); helper.setNext(head); &#125; System.out.println("最後留在圈中的節點編號是" + helper.getNo());&#125;]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Doubly Linked List]]></title>
+    <url>%2F2020%2F06%2F21%2FDoubly-Linked-List%2F</url>
+    <content type="text"><![CDATA[Doubly Linked List 1234567891011121314151617181920212223242526272829303132public void addNodeByOrder(HeroNode node) &#123; //因為頭節點不能動，我們需要通過輔助指針(變量)來找到添加的位置 //我們找的temp是位於添加位置的前一個節點 HeroNode temp = head; boolean flag = false; //標識添加的編號是否存在 while(true) &#123; if(temp.next == null) &#123; break; &#125; if(temp.next.no &gt; node.no) &#123; break; &#125; else if (temp.next.no == node.no) &#123; flag = true; break; &#125; temp = temp.next; &#125; //退出while loop if(flag) &#123; System.out.printf("準備加入的英雄的編號 %d 已經存在，不能加入\n", node.no); &#125; else &#123; if(temp.next == null) &#123; node.prev = temp; temp.next = node; &#125; else &#123; node.prev = temp; node.next = temp.next; temp.next.prev = node; temp.next = node; &#125; &#125;&#125;]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Singly Linked List Interview Question]]></title>
+    <url>%2F2020%2F06%2F20%2FSingly-Linked-List-Interview-Question%2F</url>
+    <content type="text"><![CDATA[Singly Linked List Interview Question 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263//獲取Linked list中節點的個數，不統計頭節點public static int getLength(HeroNode head) &#123; if(head.next == null) &#123; return 0; &#125; int length = 0; HeroNode temp = head.next; while(temp != null) &#123; length++; temp = temp.next; &#125; return length;&#125;//獲取Linked list中倒數第k個節點public static HeroNode getLastIndexNode(HeroNode head, int index) &#123; if(head.next == null) &#123; return null; &#125; int length = getLength(head); if(index &lt;=0 || index &gt; length) &#123; return null; &#125; HeroNode temp = head.next; for (int i = 0; i &lt; length - index; i++) &#123; temp = temp.next; &#125; return temp;&#125;//反轉Linked listpublic static void reverseList(HeroNode head) &#123; if(head.next == null || head.next.next == null) &#123; return; &#125; HeroNode cur = head.next; HeroNode next = null; HeroNode reverseHead = new HeroNode(0,"",""); while(cur != null) &#123; next = cur.next; //利用next保存下一個節點 cur.next = reverseHead.next; //將cur的下一個節點指向新Linked list的最前端 reverseHead.next = cur; //將當前節點cur連接到新Linked list cur = next; //cur後移 &#125; head.next = reverseHead.next;&#125;//逆序打印Linked listpublic static void reversePrint(HeroNode head) &#123; if(head.next == null) &#123; return; &#125; Stack&lt;HeroNode&gt; stack = new Stack&lt;&gt;(); HeroNode temp = head.next; while(temp != null) &#123; stack.push(temp); temp = temp.next; &#125; while(stack.size() &gt; 0) &#123; System.out.println(stack.pop()); &#125;&#125;]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Singly Linked List]]></title>
+    <url>%2F2020%2F06%2F20%2FSingly-Linked-List%2F</url>
+    <content type="text"><![CDATA[Singly Linked List 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495//初始化一個頭節點，頭節點不要動，不存放具體數據private HeroNode head = new HeroNode(0,"","");//添加節點到Linked List//不考慮編號順序public void addNode(HeroNode node) &#123; HeroNode temp = head; //遍歷Linked List，找到最後一個節點 while(true) &#123; if(temp.next == null) &#123; break; &#125; temp = temp.next; &#125; //當退出while loop時，temp指向了Linked List最後一個節點 temp.next = node;&#125;//根據編號將英雄插入到指定位置public void addNodeByOrder(HeroNode node) &#123; //因為頭節點不能動，我們需要通過輔助指針(變量)來找到添加的位置 //我們找的temp是位於添加位置的前一個節點，否則加入不了 HeroNode temp = head; boolean flag = false; //標識添加的編號是否存在 while(true) &#123; if(temp.next == null) &#123; break; &#125; if(temp.next.no &gt; node.no) &#123; break; &#125; else if (temp.next.no == node.no) &#123; flag = true; break; &#125; temp = temp.next; &#125; //退出while loop if(flag) &#123; System.out.printf("準備加入的英雄的編號 %d 已經存在，不能加入\n", node.no); &#125; else &#123; node.next = temp.next; temp.next = node; &#125;&#125;public void updateNode(HeroNode node) &#123; if(head.next == null) &#123; System.out.println("Linked list is empty."); return; &#125; HeroNode temp = head.next; boolean flag = false; //標識是否找到準備編輯的英雄的編號 while(true) &#123; if(temp == null) &#123; break; &#125; if(temp.no == node.no) &#123; flag = true; break; &#125; temp = temp.next; &#125; if(flag) &#123; temp.name = node.name; temp.nickname = node.nickname; &#125; else &#123; System.out.printf("Cannot find hero with no=%d\n", node.no); &#125;&#125;public void deleteNode(int no) &#123; if(head.next == null) &#123; System.out.println("Linked list is empty."); return; &#125; HeroNode temp = head; boolean flag = false; while(true) &#123; if(temp.next == null) &#123; break; &#125; if(temp.next.no == no) &#123; flag = true; break; &#125; temp = temp.next; &#125; if(flag) &#123; temp.next = temp.next.next; &#125; else &#123; System.out.printf("Cannot delete hero with no=%d\n", no); &#125;&#125; 總結： 什麼時候HeroNode temp = head，什麼時候HeroNode temp = head.next？ temp是一個指針，當你需要使用temp.next做事情，例如deleteNode()當中，temp需要指向head 123if(flag) &#123; temp.next = temp.next.next;&#125; 如果你需要使用temp做事情，temp可以指向head.next，例如updateNode()當中 1234if(flag) &#123; temp.name = node.name; temp.nickname = node.nickname;&#125; temp一開始指向哪裡，視乎你的解題思路，視乎你後面要做什麼。 Singly linked list的缺點 查找的方向只能是一個方向，向後查找，Doubly linked list可以向前或向後查找。 Singly linked list不能自我刪除，需要靠輔助節點，總是通過temp，temp是待刪除節點的前一個節點；而Doubly linked list則可以自我刪除。]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Circular Array Queue]]></title>
+    <url>%2F2020%2F06%2F16%2FCircular-Array-Queue%2F</url>
+    <content type="text"><![CDATA[Circular Array Queue 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556private int maxSize;private int front; //指向隊列第一個元素，初始值是0private int rear; //指向隊列最後一個元素的後一個位置，初始值是0，arr[rear]總是一個空白位置private int[] arr;public boolean isFull() &#123; // 假設maxSize=4，當rear=3，front=0，隊列已滿 // 假設maxSize=4，當rear=0，front=1，隊列已滿 return (rear + 1) % maxSize == front;&#125;public boolean isEmpty() &#123; return front == rear;&#125;public void addToQueue(int num) &#123; if(isFull()) &#123; System.out.println("The queue is full, cannot add data."); return; &#125; arr[rear] = num; rear = (rear + 1) % maxSize;&#125;public int getFrmQueue() &#123; if(isEmpty()) &#123; throw new RuntimeException("The queue is empty, cannot retrieve data."); &#125; int value = arr[front]; front = (front + 1) % maxSize; return value;&#125;public void showQueue() &#123; if(isEmpty()) &#123; System.out.println("The queue is empty, there are no data."); return; &#125; for (int i = front; i &lt; front + size(); i++) &#123; System.out.printf("arr[%d]=%d\n", i % maxSize, arr[i % maxSize]); &#125;&#125;public int peekQueue() &#123; if(isEmpty()) &#123; throw new RuntimeException("The queue is empty, there are no data."); &#125; return arr[front];&#125;//求得當前有效數據的個數public int size() &#123; // 假設maxSize=4，rear=1，front=0，有效數據1個 // 假設maxSize=4，rear=3，front=1，有效數據2個 return (rear + maxSize - front) % maxSize;&#125;]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Array Queue]]></title>
     <url>%2F2020%2F06%2F15%2FArray-Queue%2F</url>
     <content type="text"><![CDATA[Array Queue 1234567891011121314public ArrayQueue(int maxSize) &#123; this.maxSize = maxSize; arr = new int[maxSize]; front = -1; //指向隊列頭一個數據的前一個位置 rear = -1; //指向隊列最後一個數據&#125;public boolean isFull() &#123; return rear == maxSize - 1;&#125;public boolean isEmpty() &#123; return front == rear;&#125;]]></content>
