@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[測試]]></title>
-    <url>%2F2020%2F10%2F05%2F%E6%B8%AC%E8%A9%A6%2F</url>
-    <content type="text"><![CDATA[測試]]></content>
-  </entry>
-  <entry>
     <title><![CDATA[Huffman Tree]]></title>
     <url>%2F2020%2F08%2F12%2FHuffman-Tree%2F</url>
     <content type="text"><![CDATA[Huffman Tree 12345678910111213141516171819202122232425262728293031public static Node createHuffmanTree(int[] arr) &#123; List&lt;Node&gt; nodeList = new ArrayList&lt;&gt;(); for(int value : arr) &#123; nodeList.add(new Node(value)); &#125; while(nodeList.size() &gt; 1) &#123; Collections.sort(nodeList); Node left = nodeList.get(0); Node right = nodeList.get(1); Node parent = new Node(left.value + right.value); parent.left = left; parent.right = right; nodeList.remove(left); nodeList.remove(right); nodeList.add(parent); &#125; return nodeList.get(0);&#125;@Overridepublic int compareTo(Node o) &#123; //從小到大排序 //如果想從大到小排序，則寫成 -(this.value - o.value) return this.value - o.value;&#125;]]></content>
