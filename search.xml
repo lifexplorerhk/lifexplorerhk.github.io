@@ -1,6 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Huffman Tree]]></title>
+    <url>%2F2020%2F08%2F12%2FHuffman-Tree%2F</url>
+    <content type="text"><![CDATA[Huffman Tree 12345678910111213141516171819202122232425262728293031public static Node createHuffmanTree(int[] arr) &#123; List&lt;Node&gt; nodeList = new ArrayList&lt;&gt;(); for(int value : arr) &#123; nodeList.add(new Node(value)); &#125; while(nodeList.size() &gt; 1) &#123; Collections.sort(nodeList); Node left = nodeList.get(0); Node right = nodeList.get(1); Node parent = new Node(left.value + right.value); parent.left = left; parent.right = right; nodeList.remove(left); nodeList.remove(right); nodeList.add(parent); &#125; return nodeList.get(0);&#125;@Overridepublic int compareTo(Node o) &#123; //從小到大排序 //如果想從大到小排序，則寫成 -(this.value - o.value) return this.value - o.value;&#125;]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Heap Sort]]></title>
+    <url>%2F2020%2F07%2F22%2FHeap-Sort%2F</url>
+    <content type="text"><![CDATA[Heap Sort 1234567891011121314151617181920212223242526272829303132333435public static void heapSort(int[] arr) &#123; int temp; for (int i = arr.length / 2 - 1; i &gt;= 0 ; i--) &#123; adjust(arr, i, arr.length); &#125; //完成上面的for循環後，會得到一個大頂堆 for (int j = arr.length - 1; j &gt; 0 ; j--) &#123; //最前和最後的元素進行交換 temp = arr[j]; arr[j] = arr[0]; arr[0] = temp; adjust(arr, 0, j); &#125;&#125;public static void adjust(int[] arr, int i, int length) &#123; int temp = arr[i]; //先保存i節點的值 //k是i節點的左子節點的下標 for(int k = i * 2 + 1; k &lt; length; k = k * 2 + 1) &#123; if(k + 1 &lt; length &amp;&amp; arr[k] &lt; arr[k + 1]) &#123; //比較左右子節點的值，如果右子節點的值較大，將k指向右子節點 k++; &#125; if(arr[k] &gt; temp) &#123; //如果子節點的值大於父節點 arr[i] = arr[k]; //將子節點的值賦給父節點 i = k; //將父節點i指向子節點k &#125; else &#123; break; &#125; &#125; arr[i] = temp; //i的位置可能有變動，將最初i節點的值賦給新的i節點&#125;]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Threaded Binary Tree]]></title>
+    <url>%2F2020%2F07%2F21%2FThreaded-Binary-Tree%2F</url>
+    <content type="text"><![CDATA[Threaded Binary Tree 1234567891011121314151617181920212223242526272829303132333435363738394041424344static class HeroNode &#123; private int no; private String name; private HeroNode left; private HeroNode right; private int leftType; //0:指向左子樹，1:指向前驅節點 private int rightType; //0:指向右子樹，1:指向後繼節點&#125;public void threadedNode(HeroNode node) &#123; if(node == null) &#123; return; &#125; threadedNode(node.left); if(node.left == null) &#123; node.left = pre; node.leftType = 1; &#125; if(pre != null &amp;&amp; pre.right == null) &#123; pre.right = node; pre.rightType = 1; &#125; pre = node; threadedNode(node.right);&#125;public void threadedList() &#123; HeroNode node = root; while(node != null) &#123; while(node.leftType == 0) &#123; node = node.left; &#125; System.out.println(node); while(node.rightType == 1) &#123; node = node.right; System.out.println(node); &#125; node = node.right; &#125;&#125;]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Binary Tree]]></title>
+    <url>%2F2020%2F07%2F20%2FBinary-Tree%2F</url>
+    <content type="text"><![CDATA[Binary Tree 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100public void delNode(int no) &#123; if(this.left != null &amp;&amp; this.left.no == no) &#123; this.left = null; return; &#125; if(this.right != null &amp;&amp; this.right.no == no) &#123; this.right = null; return; &#125; if(this.left != null) &#123; this.left.delNode(no); &#125; if(this.right != null) &#123; this.right.delNode(no); &#125;&#125;public void preOrder() &#123; System.out.println(this); if(this.left != null) &#123; this.left.preOrder(); &#125; if(this.right != null) &#123; this.right.preOrder(); &#125;&#125;public void infixOrder() &#123; if(this.left != null) &#123; this.left.infixOrder(); &#125; System.out.println(this); if(this.right != null) &#123; this.right.infixOrder(); &#125;&#125;public void postOrder() &#123; if(this.left != null) &#123; this.left.postOrder(); &#125; if(this.right != null) &#123; this.right.postOrder(); &#125; System.out.println(this);&#125;public HeroNode preOrderSearch(int no) &#123; if(this.no == no) &#123; return this; &#125; HeroNode resNode = null; if(this.left != null) &#123; resNode = this.left.preOrderSearch(no); &#125; if(resNode != null) &#123; return resNode; &#125; if(this.right != null) &#123; resNode = this.right.preOrderSearch(no); &#125; return resNode;&#125;public HeroNode infixOrderSearch(int no) &#123; HeroNode resNode = null; if(this.left != null) &#123; resNode = this.left.infixOrderSearch(no); &#125; if(resNode != null) &#123; return resNode; &#125; if(this.no == no) &#123; return this; &#125; if(this.right != null) &#123; resNode = this.right.infixOrderSearch(no); &#125; return resNode;&#125;public HeroNode postOrderSearch(int no) &#123; HeroNode resNode = null; if(this.left != null) &#123; resNode = this.left.postOrderSearch(no); &#125; if(resNode != null) &#123; return resNode; &#125; if(this.right != null) &#123; resNode = this.right.postOrderSearch(no); &#125; if(resNode != null) &#123; return resNode; &#125; if(this.no == no) &#123; return this; &#125; return resNode;&#125;]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hash Table]]></title>
+    <url>%2F2020%2F07%2F15%2FHash-Table%2F</url>
+    <content type="text"><![CDATA[Hash Table 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283static class Emp &#123; public int id; public String name; public Emp next; public Emp(int id, String name) &#123; this.id = id; this.name = name; &#125;&#125;static class EmpLinkedList &#123; private Emp head; public void add(Emp emp) &#123; if(head == null) &#123; head = emp; return; &#125; Emp temp = head; while(temp.next != null) &#123; temp = temp.next; &#125; temp.next = emp; &#125; public void del(int id) &#123; if(head == null) &#123; System.out.printf("id %d not found.\n", id); return; &#125; if(head.id == id) &#123; head = head.next; System.out.printf("Employee id=%d is deleted.\n", id); return; &#125; if(head.next == null) &#123; System.out.printf("id %d not found.\n", id); return; &#125; Emp temp = head; Emp cur = temp.next; while(cur.id != id) &#123; if(cur.next == null) &#123; System.out.printf("id %d not found.\n", id); return; &#125; cur = cur.next; temp = temp.next; &#125; temp.next = cur.next; System.out.printf("Employee id=%d is deleted.\n", id); &#125; public void list(int no) &#123; if(head == null) &#123; System.out.println("Linked List " + (no + 1) +" is empty."); return; &#125; System.out.print("Linked List " + (no + 1) +" as follow:"); Emp temp = head; while(temp != null) &#123; System.out.printf(" =&gt; id=%d name=%s\t", temp.id, temp.name); temp = temp.next; &#125; System.out.println(); &#125; public Emp findEmpById(int id) &#123; if(head == null) &#123; System.out.println("Linked List is empty."); return null; &#125; Emp temp = head; while(temp.id != id) &#123; if(temp.next == null) &#123; break; &#125; temp = temp.next; &#125; return temp.id == id ? temp : null; &#125;&#125;]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Fibonacci Search]]></title>
+    <url>%2F2020%2F07%2F13%2FFibonacci-Search%2F</url>
+    <content type="text"><![CDATA[Fibonacci Search 12345678910111213141516171819202122232425262728293031323334353637383940414243444546public static int[] fib() &#123; int[] f = new int[maxSize]; f[0] = 0; f[1] = 1; for (int i = 2; i &lt; maxSize; i++) &#123; f[i] = f[i - 1] + f[i - 2]; &#125; return f;&#125;public static int fibSearch(int[] arr, int key) &#123; int low = 0; int high = arr.length - 1; int k = 0; int mid = 0; int[] f = fib(); while(high &gt; f[k] - 1) &#123; k++; &#125; int[] temp = Arrays.copyOf(arr, f[k]); for (int i = high + 1; i &lt; temp.length; i++) &#123; temp[i] = arr[high]; &#125; while(low &lt;= high) &#123; mid = low + f[k - 1] - 1; if(key &lt; temp[mid]) &#123; high = mid - 1; k--; &#125; else if(key &gt; temp[mid]) &#123; low = mid + 1; k -=2; &#125; else &#123; //**mid有機會大於high嗎? // if(mid &lt;= high) &#123; // return mid; // &#125; else &#123; // return high; // &#125; return mid; &#125; &#125; return -1;&#125;]]></content>
+      <tags>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Interpolation Search]]></title>
+    <url>%2F2020%2F07%2F12%2FInterpolation-Search%2F</url>
+    <content type="text"><![CDATA[Interpolation Search 12345678910111213141516171819202122232425262728293031323334353637public static List&lt;Integer&gt; interpolationSearch(int[] arr, int left, int right, int findVal) &#123; if(left &gt; right || findVal &lt; arr[0] || findVal &gt; arr[arr.length - 1]) &#123; return new ArrayList&lt;&gt;(); &#125; int mid = left + (right - left) * (findVal - arr[left]) / (arr[right] - arr[left]); int midVal = arr[mid]; if(findVal &gt; midVal) &#123; return interpolationSearch(arr, mid + 1, right, findVal); &#125; else if(findVal &lt; midVal) &#123; return interpolationSearch(arr, left, mid - 1, findVal); &#125; else &#123; List&lt;Integer&gt; list = new ArrayList&lt;&gt;(); int temp = mid - 1; while(true) &#123; if(temp &lt; 0 || arr[temp] != findVal) &#123; break; &#125; list.add(temp); temp--; &#125; list.add(mid); temp = mid + 1; while(true) &#123; if(temp &gt; arr.length - 1 || arr[temp] != findVal) &#123; break; &#125; list.add(temp); temp++; &#125; return list; &#125;&#125;]]></content>
+      <tags>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Binary Search]]></title>
+    <url>%2F2020%2F07%2F12%2FBinary-Search%2F</url>
+    <content type="text"><![CDATA[Binary Search 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354public static int binarySearch(int[] arr, int left, int right, int findVal) &#123; if(left &gt; right) &#123; return -1; &#125; int mid = (left + right) / 2; int midVal = arr[mid]; if(findVal &gt; midVal) &#123; return binarySearch(arr, mid + 1, right, findVal); &#125; else if(findVal &lt; midVal) &#123; return binarySearch(arr, left, mid - 1, findVal); &#125; else &#123; return mid; &#125;&#125;public static List&lt;Integer&gt; binarySearch2(int[] arr, int left, int right, int findVal) &#123; if(left &gt; right) &#123; return new ArrayList&lt;&gt;(); &#125; int mid = (left + right) / 2; int midVal = arr[mid]; if(findVal &gt; midVal) &#123; return binarySearch2(arr, mid + 1, right, findVal); &#125; else if(findVal &lt; midVal) &#123; return binarySearch2(arr, left, mid - 1, findVal); &#125; else &#123; List&lt;Integer&gt; list = new ArrayList&lt;&gt;(); int temp = mid - 1; while(true) &#123; if(temp &lt; 0 || arr[temp] != findVal) &#123; break; &#125; list.add(temp); temp--; &#125; list.add(mid); temp = mid + 1; while(true) &#123; if(temp &gt; arr.length - 1 || arr[temp] != findVal) &#123; break; &#125; list.add(temp); temp++; &#125; return list; &#125;&#125;]]></content>
+      <tags>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Radix Sort]]></title>
+    <url>%2F2020%2F07%2F11%2FRadix-Sort%2F</url>
+    <content type="text"><![CDATA[Radix Sort 1234567891011121314151617181920212223242526272829303132333435public static void radixSort(int[] arr) &#123; int max = arr[0]; for (int i = 1; i &lt; arr.length; i++) &#123; if(arr[i] &gt; max) &#123; max = arr[i]; &#125; &#125; int maxLength = (max + "").length(); //為防止放入數據的時候，數據溢出，每個桶的大小定為arr.length //基數排序是使用空間換時間的經典算法 int[][] bucket = new int[10][arr.length]; int[] bucketElementCount = new int[10]; //記錄各個桶每次放入數據的個數 for (int i = 0, n = 1; i &lt; maxLength; i++, n *= 10) &#123; for (int j = 0; j &lt; arr.length; j++) &#123; int digitOfElement = arr[j] / n % 10; bucket[digitOfElement][bucketElementCount[digitOfElement]] = arr[j]; bucketElementCount[digitOfElement]++; &#125; int index = 0; for (int k = 0; k &lt; bucket.length; k++) &#123; if(bucketElementCount[k] != 0) &#123; for (int l = 0; l &lt; bucketElementCount[k]; l++) &#123; arr[index] = bucket[k][l]; index++; &#125; &#125; //把數據放回原數組後，重置每個bucketElementCount[k] bucketElementCount[k] = 0; &#125; &#125;&#125;]]></content>
+      <tags>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Merge Sort]]></title>
+    <url>%2F2020%2F07%2F06%2FMerge-Sort%2F</url>
+    <content type="text"><![CDATA[Merge Sort 12345678910111213141516171819202122232425262728293031323334353637383940414243444546public static void mergeSort(int[] arr, int left, int right, int[] temp) &#123; if(left &lt; right) &#123; int mid = (left + right) / 2; mergeSort(arr, left, mid, temp); mergeSort(arr, mid + 1, right, temp); merge(arr,left,mid,right,temp); &#125;&#125;public static void merge(int[] arr, int left, int mid, int right, int[] temp) &#123; int i = left; int j = mid + 1; int t = 0; while(i &lt;= mid &amp;&amp; j &lt;= right) &#123; if(arr[i] &lt;= arr[j]) &#123; temp[t] = arr[i]; t++; i++; &#125; else &#123; temp[t] = arr[j]; t++; j++; &#125; &#125; while(i &lt;= mid) &#123; temp[t] = arr[i]; t++; i++; &#125; while(j &lt;= right) &#123; temp[t] = arr[j]; t++; j++; &#125; t = 0; int tempLeft = left; while(tempLeft &lt;= right) &#123; arr[tempLeft] = temp[t]; t++; tempLeft++; &#125;&#125;]]></content>
+      <tags>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Quick Sort]]></title>
+    <url>%2F2020%2F07%2F05%2FQuick-Sort%2F</url>
+    <content type="text"><![CDATA[Quick Sort 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647public static void quickSort(int[] arr, int left, int right) &#123; int l = left; int r = right; int pivot = arr[(left + right) / 2]; int temp = 0; while(l &lt; r) &#123; //在pivot左邊一直找，直到找到大於或等於pivot值，才退出 while(arr[l] &lt; pivot) &#123; l++; &#125; //在pivot右邊一直找，直到找到小於或等於pivot值，才退出 while(arr[r] &gt; pivot) &#123; r--; &#125; if(l &gt;= r) &#123; break; &#125; temp = arr[l]; arr[l] = arr[r]; arr[r] = temp; if(arr[l] == pivot) &#123; r--; &#125; if(arr[r] == pivot) &#123; l++; &#125; &#125; //如果l == r，必須l++，r--，否則會棧溢出 if(l == r) &#123; l++; r--; &#125; if(left &lt; r) &#123; quickSort(arr, left, r); &#125; if(right &gt; l) &#123; quickSort(arr, l, right); &#125;&#125;]]></content>
+      <tags>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Shell Sort]]></title>
+    <url>%2F2020%2F07%2F05%2FShell-Sort%2F</url>
+    <content type="text"><![CDATA[Shell Sort 12345678910111213141516171819202122232425262728293031323334//交換式的希爾排序法public static void shellSort(int[] arr) &#123; int temp = 0; for (int gap = arr.length / 2; gap &gt; 0; gap /= 2) &#123; for (int i = gap; i &lt; arr.length; i++) &#123; for (int j = i - gap; j &gt;= 0 ; j -= gap) &#123; if(arr[j] &gt; arr[j + gap]) &#123; //如果當前元素大於加上步長後的元素，進行交換 temp = arr[j]; arr[j] = arr[j + gap]; arr[j + gap] = temp; &#125; &#125; &#125; &#125;&#125;//移位式的希爾排序法public static void improvedShellSort(int[] arr) &#123; for (int gap = arr.length / 2; gap &gt; 0; gap /= 2) &#123; //從第gap個元素開始，逐個對其所在的組進行插入排序 for (int i = gap; i &lt; arr.length; i++) &#123; int j = i; int temp = arr[j]; if(arr[j] &lt; arr[j - gap]) &#123; while(j - gap &gt;= 0 &amp;&amp; temp &lt; arr[j - gap]) &#123; arr[j] = arr[j - gap]; j -= gap; &#125; arr[j] = temp; &#125; &#125; &#125;&#125;]]></content>
+      <tags>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Insertion Sort]]></title>
+    <url>%2F2020%2F07%2F02%2FInsertion-Sort%2F</url>
+    <content type="text"><![CDATA[Insertion Sort 123456789101112131415public static void insertionSort(int[] arr) &#123; for (int i = 1; i &lt; arr.length; i++) &#123; int insertVal = arr[i]; //先保存待插入的數值 int insertIndex = i - 1; //準備與前一個數進行比較 while(insertIndex &gt;= 0 &amp;&amp; insertVal &lt; arr[insertIndex]) &#123; arr[insertIndex + 1] = arr[insertIndex]; insertIndex--; &#125; if(insertIndex + 1 != i) &#123; arr[insertIndex + 1] = insertVal; &#125; &#125;&#125;]]></content>
+      <tags>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Selection Sort]]></title>
+    <url>%2F2020%2F07%2F02%2FSelection-Sort%2F</url>
+    <content type="text"><![CDATA[Selection Sort 12345678910111213141516public static void selectionSort(int[] arr) &#123; for (int i = 0; i &lt; arr.length - 1; i++) &#123; int minIndex = i; int min = arr[minIndex]; for (int j = i + 1; j &lt; arr.length; j++) &#123; if(min &gt; arr[j]) &#123; min = arr[j]; minIndex = j; &#125; &#125; if(minIndex != i) &#123; arr[minIndex] = arr[i]; arr[i] = min; &#125; &#125;&#125;]]></content>
+      <tags>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Bubble Sort]]></title>
+    <url>%2F2020%2F07%2F02%2FBubble-Sort%2F</url>
+    <content type="text"><![CDATA[Bubble Sort 123456789101112131415161718192021public static void bubbleSort(int[] arr) &#123; int temp = 0; boolean flag = false; for (int i = 0; i &lt; arr.length - 1; i++) &#123; for (int j = 0; j &lt; arr.length - 1 - i; j++) &#123; if(arr[j] &gt; arr[j + 1]) &#123; flag = true; temp = arr[j]; arr[j] = arr[j + 1]; arr[j + 1] = temp; &#125; &#125; // System.out.printf("第%d趟排序後的結果",i+1); // System.out.println(Arrays.toString(arr)); if(!flag) &#123; break; &#125; else &#123; flag = false; &#125; &#125;&#125;]]></content>
+      <tags>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Eight Queens]]></title>
+    <url>%2F2020%2F06%2F29%2FEight-Queens%2F</url>
+    <content type="text"><![CDATA[Eight Queens 12345678910111213141516171819202122232425262728private void check(int n) &#123; if(n == max) &#123; //n從0開始，n==8代表正在放第9個皇后，也說明前面8個皇后已經擺放好 print(); return; &#125; //依次擺放皇后，並判斷是否有衝突 for (int i = 0; i &lt; max; i++) &#123; arr[n] = i; //每次將皇后擺放在下一列，然後judge if(judge(n)) &#123; //不衝突 //放n+1個皇后 check(n + 1); &#125; &#125;&#125;//查看當我們放第n個皇后時，檢測該皇后是否和前面已經擺放的皇后衝突private boolean judge(int n) &#123; judgeCount++; for (int i = 0; i &lt; n; i++) &#123; // arr[i] == arr[n] 代表第n個皇后和前面已經擺放的皇后在同一列 // Math.abs(n-i) == Math.abs(arr[n] - arr[i]) 代表第n個皇后和前面已經擺放的皇后在同一斜線 if(arr[i] == arr[n] || Math.abs(n-i) == Math.abs(arr[n] - arr[i])) &#123; return false; //代表有衝突 &#125; &#125; return true; //沒衝突&#125;]]></content>
+      <tags>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Maze]]></title>
+    <url>%2F2020%2F06%2F29%2FMaze%2F</url>
+    <content type="text"><![CDATA[Maze 1234567891011121314151617181920212223public static boolean setWay(int[][] map, int i, int j) &#123; if(map[map.length - 2][map[0].length - 2] == 2) &#123; return true; &#125; else &#123; if(map[i][j] == 0) &#123; map[i][j] = 2; if(setWay(map, i+1, j)) &#123; return true; &#125; else if(setWay(map, i, j+1)) &#123; return true; &#125; else if(setWay(map, i-1, j)) &#123; return true; &#125; else if(setWay(map, i, j-1)) &#123; return true; &#125; else &#123; map[i][j] = 3; return false; &#125; &#125; else &#123; return false; &#125; &#125;&#125;]]></content>
+      <tags>
+        <tag>Algorithm</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Reverse Polish Notation Calculator]]></title>
+    <url>%2F2020%2F06%2F27%2FReverse-Polish-Notation-Calculator%2F</url>
+    <content type="text"><![CDATA[Reverse Polish Notation Calculator 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113public static List&lt;String&gt; getStringList(String postfixExpression) &#123; String[] split = postfixExpression.split(" "); List&lt;String&gt; list = new ArrayList&lt;&gt;(); for(String ele: split) &#123; list.add(ele); &#125; return list;&#125;public static int calculate(List&lt;String&gt; list) &#123; Stack&lt;String&gt; stack = new Stack&lt;&gt;(); for(String str : list) &#123; if(str.matches("\\d+")) &#123; //匹配的是多位數 stack.push(str); &#125; else &#123; int num2 = Integer.parseInt(stack.pop()); int num1 = Integer.parseInt(stack.pop()); int res = 0; if(str.equals("+")) &#123; res = num1 + num2; &#125; else if(str.equals("-")) &#123; res = num1 - num2; &#125; else if(str.equals("*")) &#123; res = num1 * num2; &#125; else if(str.equals("/")) &#123; res = num1 / num2; &#125; else &#123; throw new RuntimeException("運算符有誤"); &#125; stack.push("" + res); &#125; &#125; return Integer.parseInt(stack.pop());&#125;public static List&lt;String&gt; toInfixExpressionList(String expression) &#123; List&lt;String&gt; list = new ArrayList&lt;&gt;(); int i = 0; String str; char c; do &#123; if((c = expression.charAt(i)) &lt; 48 || (c = expression.charAt(i)) &gt; 57) &#123; list.add("" + c); i++; &#125; else &#123; str = ""; while(i &lt; expression.length() &amp;&amp; (c = expression.charAt(i)) &gt;= 48 &amp;&amp; (c = expression.charAt(i)) &lt;= 57) &#123; str += c; i++; &#125; list.add(str); &#125; &#125; while(i &lt; expression.length()); return list;&#125;public static List&lt;String&gt; parsePostfixExpression(List&lt;String&gt; list) &#123; Stack&lt;String&gt; stack = new Stack&lt;&gt;(); List&lt;String&gt; postfixExpressionList = new ArrayList&lt;&gt;(); for(String item: list) &#123; if(item.matches("\\d+")) &#123; postfixExpressionList.add(item); &#125; else if(item.equals("(")) &#123; stack.push(item); &#125; else if(item.equals(")")) &#123; while(!stack.peek().equals("(")) &#123; postfixExpressionList.add(stack.pop()); &#125; stack.pop(); //將 ( 出棧 &#125; else &#123; while(stack.size() != 0 &amp;&amp; Operation.getValue(stack.peek()) &gt;= Operation.getValue(item)) &#123; postfixExpressionList.add(stack.pop()); &#125; stack.push(item); &#125; &#125; while(stack.size() != 0) &#123; postfixExpressionList.add(stack.pop()); &#125; return postfixExpressionList;&#125;static class Operation &#123; private static int ADD = 1; private static int SUB = 1; private static int MUL = 2; private static int DIV = 2; public static int getValue(String operation) &#123; int res = 0; switch(operation) &#123; case "+": res = ADD; break; case "-": res = SUB; break; case "*": res = MUL; break; case "/": res = DIV; break; default: System.out.println("不存在該運算符"); break; &#125; return res; &#125;&#125;]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Calculator]]></title>
+    <url>%2F2020%2F06%2F25%2FCalculator%2F</url>
+    <content type="text"><![CDATA[Calculator 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758ArrayStack numStack = new ArrayStack(10);ArrayStack operStack = new ArrayStack(10);int index = 0;int num1 = 0;int num2 = 0;int oper = 0;int res = 0;char ch = ' ';String keepNum = "";while(true) &#123; ch = expression.substring(index, index+1).charAt(0); if(operStack.isOper(ch)) &#123; if(operStack.isEmpty()) &#123; operStack.push(ch); &#125; else &#123; if(operStack.priority(ch) &lt;= operStack.priority(operStack.peek())) &#123; num1 = numStack.pop(); num2 = numStack.pop(); oper = operStack.pop(); res = numStack.cal(num1, num2, oper); numStack.push(res); operStack.push(ch); &#125; else &#123; operStack.push(ch); &#125; &#125; &#125; else &#123; keepNum += ch; if(index == expression.length() - 1) &#123; numStack.push(Integer.parseInt(keepNum)); &#125; else &#123; if(operStack.isOper(expression.substring(index+1,index+2).charAt(0))) &#123; numStack.push(Integer.parseInt(keepNum)); keepNum = ""; &#125; &#125; &#125; index++; if(index == expression.length()) &#123; break; &#125;&#125;while(true) &#123; if(operStack.isEmpty()) &#123; break; &#125; num1 = numStack.pop(); num2 = numStack.pop(); oper = operStack.pop(); res = numStack.cal(num1, num2, oper); numStack.push(res);&#125;System.out.println(numStack.pop());]]></content>
+      <tags>
+        <tag>Data Structure</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Singly Linked List Stack]]></title>
     <url>%2F2020%2F06%2F23%2FSingly-Linked-List-Stack%2F</url>
     <content type="text"><![CDATA[Singly Linked List Stack 123456789101112131415161718192021222324252627282930313233343536373839private Node head = new Node(0);public void push(int num) &#123; Node node = new Node(num); Node temp = head; while(temp.next != null) &#123; temp = temp.next; &#125; temp.next = node;&#125;public int pop() &#123; if(head.next == null) &#123; throw new RuntimeException("棧空"); &#125; Node temp = head; while(temp.next.next != null) &#123; temp = temp.next; &#125; int val = temp.next.num; temp.next = null; return val;&#125;public void list() &#123; if(head.next == null) &#123; System.out.println("棧空"); return; &#125; Stack&lt;Node&gt; stack = new Stack&lt;&gt;(); Node temp = head.next; while(temp != null) &#123; stack.push(temp); temp = temp.next; &#125; while(stack.size() &gt; 0) &#123; System.out.println(stack.pop()); &#125;&#125;]]></content>
